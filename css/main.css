@@ -1,0 +1,95 @@
+
+.controller{
+	background: #d0c9c9;
+	width: 200px;
+	min-width: 200px;
+	/*width: 20%;*/
+	/*height: 100%;*/
+	height: inherit;
+}
+
+.main{
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
+.interface{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin: 5px 10px;
+	font-size: 1.2rem;
+}
+
+.interface .UIButton,
+.interface input{
+	font-size: 1.2rem;
+}
+
+.interface input{
+	width: 100%;
+	/*width: 50%;*/
+}
+
+.animation-interface{
+	display:flex;
+	flex-wrap: wrap;
+	width: 100%;
+	/*max-width: inherit;*/
+	align-items: flex-start;
+	justify-content: center;
+	border-top: solid 1px grey;	
+}
+
+.UIButton{	
+	margin-top: 5px;
+	margin-bottom: 5px;	
+}
+
+.play-zone{
+	flex-grow: 1;
+	display:flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+
+.animation-controller{
+	display:flex;
+	flex-direction: column;
+	border: solid 1px orange;
+	align-self: flex-start;
+	/*max-width: 300px;	*/
+	margin: 0 10px 10px 10px;
+	align-items: center;
+	padding: 5px;
+}
+
+canvas{
+	border: solid 1px blue;
+}
+
+.animation-btn{
+	margin: 4px;
+	font-size: 1.2rem;
+}
+
+.symbol-selection, .scene-selection{
+	margin : 5px auto;
+	padding-top : 10px;
+	/*border-top : solid 1px grey;*/
+}
+
+.select-dropdown{
+	margin-right: 10px;
+	width: 120px;
+}
+
+.select-btn{
+	width: 50px;
+}
+
+html, body{
+	width: 100%;
+	height: 100%;
+}
