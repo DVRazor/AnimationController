@@ -7,10 +7,40 @@
 		<link rel='stylesheet' href='css/main.css'>
 	</head>
 	
-	<body>
+	<body>	
+		<div class='main'>
+
+			<div class='controller'>
+				<div class='interface' id='interface'>
+					<button id='create' class='UIButton'>Create</button>									
+					
+					<label for='animation-width' >Width:</label>
+					<input type='text' id='animation-width' maxlength="4" value='300'>
+					<label for='animation-height'>Height:</label>
+					<input type='text' id='animation-height' maxlength="4" value='300'>
+					<label for='animation-scaleX'>ScaleX:</label>
+					<input type='text' id='animation-scale-x' value='1'>
+					<label for='animation-scaleY'>ScaleY:</label>
+					<input type='text' id='animation-scale-y' value='1'>
+
+					<button id='clear' class='UIButton'>Clear all</button>	
+
+				</div>
+			</div>
+
+			<div class='play-zone'></div>
+		</div>
+
 		<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
-		<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
-		<script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>		
+		<script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
+		<script src="http://code.createjs.com/tweenjs-0.4.0.min.js"></script>
+		<script src="http://code.createjs.com/movieclip-0.6.0.min.js"></script>		
+		<script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
+		<script src='js/AnimationController.js'></script>
+		<script src='js/main.js'></script>		
+
 	</body>
+
+	
 
 </html>
