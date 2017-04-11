@@ -1,9 +1,9 @@
 {
 	"LeftPlayer" : 
 	{
-		"path" : "assets/players",
+		"path" : "assets/players/",
 
-		"export" : "players.js",
+		"jsFile" : "players.js",
 
 		"width" : 244,
 
@@ -18,7 +18,7 @@
 			"bendBack" : [61, 204]
 		},
 
-		"manifest" : [
+		"images" : [
 			{"src":"images/_1_ShoeLRed.png", "id":"_1_ShoeLRed"},
 			{"src":"images/_1_ShoeRRed.png", "id":"_1_ShoeRRed"},
 			{"src":"images/_2_HandL1.png", "id":"_2_HandL1"},
@@ -125,9 +125,9 @@
 
 	"RightPlayer": 
 	{
-		"path" : "assets/players",
+		"path" : "assets/players/",
 
-		"export" : "players.js",
+		"jsFile" : "players.js",
 
 		"width" : 244,
 
@@ -142,7 +142,7 @@
 			"bendBack" : [61, 204]
 		},
 
-		"manifest" : [
+		"images" : [
 			{"src":"images/_1_ShoeLRed.png", "id":"_1_ShoeLRed"},
 			{"src":"images/_1_ShoeRRed.png", "id":"_1_ShoeRRed"},
 			{"src":"images/_2_HandL1.png", "id":"_2_HandL1"},
@@ -244,6 +244,162 @@
 			{"src":"images/Sit_Rukav_R_Red.png", "id":"Sit_Rukav_R_Red"},
 			{"src":"images/Sit_Stopa_L.png", "id":"Sit_Stopa_L"},
 			{"src":"images/Sit_Stopa_R.png", "id":"Sit_Stopa_R"}
+		]
+	},
+
+	"Scarfman" : 
+	{
+		"path" : "assets/scarfman/",
+
+		"jsFile" : "scarfman.js",
+
+		"width" : 259,
+
+		"height" : 142,
+
+		"labels" : 
+		{
+			"sharfUp" : [0, 24],
+			"sharfHoldUp" : [24, 49],
+			"scarfDown" : [49, 73],
+			"toFacepalm" : [73, 91],
+			"Facepalm" : [91, 106],
+			"fromFacepalm" : [106, 125]
+		},
+
+		"images" :
+		[
+			{"src":"images/Golova.png", "id":"Golova"},
+			{"src":"images/Golova_2.png", "id":"Golova_2"},
+			{"src":"images/GolovaB.png", "id":"GolovaB"},
+			{"src":"images/KidtSharf_R.png", "id":"KidtSharf_R"},
+			{"src":"images/KidtSharf_R_White.png", "id":"KidtSharf_R_White"},
+			{"src":"images/KistSarf_L.png", "id":"KistSarf_L"},
+			{"src":"images/KistSarf_LWhite.png", "id":"KistSarf_LWhite"},
+			{"src":"images/Ladon_L.png", "id":"Ladon_L"},
+			{"src":"images/Ladon_R.png", "id":"Ladon_R"},
+			{"src":"images/Ladon_RWhite.png", "id":"Ladon_RWhite"},
+			{"src":"images/Ladon_Tyl.png", "id":"Ladon_Tyl"},
+			{"src":"images/Lico.png", "id":"Lico"},
+			{"src":"images/Mayka.png", "id":"Mayka"},
+			{"src":"images/Mayka_2.png", "id":"Mayka_2"},
+			{"src":"images/Plecho_L.png", "id":"Plecho_L"},
+			{"src":"images/Plecho_L_2.png", "id":"Plecho_L_2"},
+			{"src":"images/Plecho_R.png", "id":"Plecho_R"},
+			{"src":"images/Plecho_R_2.png", "id":"Plecho_R_2"},
+			{"src":"images/Predpleche_L.png", "id":"Predpleche_L"},
+			{"src":"images/Predpleche_L_2.png", "id":"Predpleche_L_2"},
+			{"src":"images/Predpleche_R.png", "id":"Predpleche_R"},
+			{"src":"images/Predpleche_R_2.png", "id":"Predpleche_R_2"},
+			{"src":"images/Sharf1.png", "id":"Sharf1"},
+			{"src":"images/Sharf1_White.png", "id":"Sharf1_White"},
+			{"src":"images/Sharf2.png", "id":"Sharf2"},
+			{"src":"images/Sharf2_White.png", "id":"Sharf2_White"},
+			{"src":"images/Sharf3.png", "id":"Sharf3"},
+			{"src":"images/Sharf3White.png", "id":"Sharf3White"},
+			{"src":"images/Sharf4.png", "id":"Sharf4"},
+			{"src":"images/Sharf4White.png", "id":"Sharf4White"},
+			{"src":"images/Sheya.png", "id":"Sheya"}
+		]
+	},
+
+	"ScarfmanWhite": 
+	{
+		"path" : "assets/scarfman/",
+
+		"jsFile" : "scarfman.js",
+
+		"width" : 259,
+
+		"height" : 142,
+
+		"labels" : 
+		{
+			"sharfUp" : [0, 24],
+			"sharfHoldUp" : [24, 49],
+			"scarfDown" : [49, 73],
+			"toFacepalm" : [73, 91],
+			"Facepalm" : [91, 106],
+			"fromFacepalm" : [106, 125]
+		},
+
+		"images" :
+		[
+			{"src":"images/Golova.png", "id":"Golova"},
+			{"src":"images/Golova_2.png", "id":"Golova_2"},
+			{"src":"images/GolovaB.png", "id":"GolovaB"},
+			{"src":"images/KidtSharf_R.png", "id":"KidtSharf_R"},
+			{"src":"images/KidtSharf_R_White.png", "id":"KidtSharf_R_White"},
+			{"src":"images/KistSarf_L.png", "id":"KistSarf_L"},
+			{"src":"images/KistSarf_LWhite.png", "id":"KistSarf_LWhite"},
+			{"src":"images/Ladon_L.png", "id":"Ladon_L"},
+			{"src":"images/Ladon_R.png", "id":"Ladon_R"},
+			{"src":"images/Ladon_RWhite.png", "id":"Ladon_RWhite"},
+			{"src":"images/Ladon_Tyl.png", "id":"Ladon_Tyl"},
+			{"src":"images/Lico.png", "id":"Lico"},
+			{"src":"images/Mayka.png", "id":"Mayka"},
+			{"src":"images/Mayka_2.png", "id":"Mayka_2"},
+			{"src":"images/Plecho_L.png", "id":"Plecho_L"},
+			{"src":"images/Plecho_L_2.png", "id":"Plecho_L_2"},
+			{"src":"images/Plecho_R.png", "id":"Plecho_R"},
+			{"src":"images/Plecho_R_2.png", "id":"Plecho_R_2"},
+			{"src":"images/Predpleche_L.png", "id":"Predpleche_L"},
+			{"src":"images/Predpleche_L_2.png", "id":"Predpleche_L_2"},
+			{"src":"images/Predpleche_R.png", "id":"Predpleche_R"},
+			{"src":"images/Predpleche_R_2.png", "id":"Predpleche_R_2"},
+			{"src":"images/Sharf1.png", "id":"Sharf1"},
+			{"src":"images/Sharf1_White.png", "id":"Sharf1_White"},
+			{"src":"images/Sharf2.png", "id":"Sharf2"},
+			{"src":"images/Sharf2_White.png", "id":"Sharf2_White"},
+			{"src":"images/Sharf3.png", "id":"Sharf3"},
+			{"src":"images/Sharf3White.png", "id":"Sharf3White"},
+			{"src":"images/Sharf4.png", "id":"Sharf4"},
+			{"src":"images/Sharf4White.png", "id":"Sharf4White"},
+			{"src":"images/Sheya.png", "id":"Sheya"}
+		]
+	},
+
+	"Trener": 
+	{
+		"path" : "assets/trener/",
+
+		"jsFile" : "trener.js",
+
+		"width" : 310,
+
+		"height" : 286,
+
+		"labels" : 
+		{
+			"nodHead" : [0, 77],
+			"watch" : [77, 116],
+			"static" : [116, 128],
+			"whistle" : [128, 234],
+			"yawn" : [234, 291]			
+		},
+
+		"images" :
+		[
+			{"src":"images/Tr_1_head.png", "id":"Tr_1_head"},
+			{"src":"images/Tr_1_head_closed.png", "id":"Tr_1_head_closed"},
+			{"src":"images/Tr_1_rukav.png", "id":"Tr_1_rukav"},
+			{"src":"images/Tr_1_tors.png", "id":"Tr_1_tors"},
+			{"src":"images/Tr_C_Hand_1.png", "id":"Tr_C_Hand_1"},
+			{"src":"images/Tr_C_hand_2.png", "id":"Tr_C_hand_2"},
+			{"src":"images/Tr_C_hand_3.png", "id":"Tr_C_hand_3"},
+			{"src":"images/Tr_C_head.png", "id":"Tr_C_head"},
+			{"src":"images/Tr_C_tors.png", "id":"Tr_C_tors"},
+			{"src":"images/Tr_S_hand_1.png", "id":"Tr_S_hand_1"},
+			{"src":"images/Tr_S_hand_2.png", "id":"Tr_S_hand_2"},
+			{"src":"images/Tr_S_Hand_3.png", "id":"Tr_S_Hand_3"},
+			{"src":"images/Tr_S_hand_s.png", "id":"Tr_S_hand_s"},
+			{"src":"images/Tr_S_head.png", "id":"Tr_S_head"},
+			{"src":"images/Tr_S_tors.png", "id":"Tr_S_tors"},
+			{"src":"images/Tr_Z_hand_1.png", "id":"Tr_Z_hand_1"},
+			{"src":"images/Tr_Z_hand_2.png", "id":"Tr_Z_hand_2"},
+			{"src":"images/Tr_Z_hand_3.png", "id":"Tr_Z_hand_3"},
+			{"src":"images/Tr_Z_head.png", "id":"Tr_Z_head"},
+			{"src":"images/Tr_Z_tors.png", "id":"Tr_Z_tors"}
 		]
 	}
 }
