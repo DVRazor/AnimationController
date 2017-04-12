@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	 $.getJSON("assets/symbols.json", function (res) {	 	
-
+	 $.getJSON("assets/symbols.json", function (res) {	 		 
+	 	
 	 	var playZone = $('.play-zone');
-	 	window.AC = new AnimationController(res, playZone, onAnimationReady);	 
+	 	var CT = window.CT = new ControllerTester(res, playZone);	 
 
 	 	var createBtn = $('#create');
 	 	createBtn.on('click', function(){
@@ -11,17 +11,13 @@ $(document).ready(function() {
 			var scaleX = $('#animation-scale-x').val();
 			var scaleY = $('#animation-scale-y').val();
 
-	 		AC.createController(width, height, scaleX, scaleY);
-	 	});
+	 		CT.createController(width, height, scaleX, scaleY);
+	 	});		
 
 	 	var clearAllBtn = $('#clear');
 	 	clearAllBtn.on('click', function(){
-	 		playZone.empty();
+	 		$(".delete-btn").click();
 	 	});
-
-	 	function onAnimationReady(){
-	 		console.log('animation loaded');
-	 	}
 	 		
 	 });	 	
 });
