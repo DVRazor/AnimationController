@@ -12,10 +12,10 @@
 		"labels" : 
 		{
 			"handsUp" : [0, 9],
-			"handsDown" : [10, 19],
+			"handsDown" : [9, 19],
 			"sitDown" : [19, 41],
-			"standUp" : [41, 61],
-			"bendBack" : [61, 204]
+			"standUp" : [41, 62],
+			"bendBack" : [62, 204]
 		},
 
 		"images" : [
@@ -136,10 +136,10 @@
 		"labels" : 
 		{
 			"handsUp" : [0, 9],
-			"handsDown" : [10, 19],
+			"handsDown" : [9, 19],
 			"sitDown" : [19, 41],
-			"standUp" : [41, 61],
-			"bendBack" : [61, 204]
+			"standUp" : [41, 62],
+			"bendBack" : [62, 204]
 		},
 
 		"images" : [
