@@ -263,7 +263,7 @@
 			"sharfHoldUp" : [24, 49],
 			"scarfDown" : [49, 73],
 			"toFacepalm" : [73, 91],
-			"Facepalm" : [91, 106],
+			"facepalm" : [91, 106],
 			"fromFacepalm" : [106, 125]
 		},
 
@@ -319,7 +319,7 @@
 			"sharfHoldUp" : [24, 49],
 			"scarfDown" : [49, 73],
 			"toFacepalm" : [73, 91],
-			"Facepalm" : [91, 106],
+			"facepalm" : [91, 106],
 			"fromFacepalm" : [106, 125]
 		},
 
