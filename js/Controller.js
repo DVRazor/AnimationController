@@ -1,4 +1,4 @@
-	var Controller = function(data, canvas, params){
+	var Controller = function(data, canvas, scaleX, scaleY){
 		var scope = this;
 
 		// used for preloading
@@ -7,17 +7,13 @@
 
 		var loader = new createjs.LoadQueue(false);
 
-		var scaleX, scaleY;
-
-		if(params){
-			scaleX = params.scaleX;
-			scaleY = params.scaleY;
-		}
+		var scaleX = scaleX;
+		var scaleY = scaleY;		
 
 		var stage = new createjs.Stage(canvas);
 
-		var symbol = null; // movieclip
-		var symbolName = null;
+		var symbol = null; // current movieclip
+		var symbolName = null; // current movieclip name
 
 		var symbolWidth = null; // movieclip width
 		var symbolHeight = null; // movieclip height
@@ -26,64 +22,44 @@
 		var startFrame = null;
 		var endFrame = null;
 
-		var rangeFinishedCB;
-		var rangeLoops = 1;
+		var rangeFinishedCB; // callback on range finished
+		var rangeLoops = 1; // num of times to play ranges
+		var ranges = []; // ranges to play
+		var currentRange = 0; // currently playing range
 
 		scope.loadSymbol = function(name, animationReadyCB){		
 			symbolName = name;	
 			loadSymbol(animationReadyCB);								
-		}		
-
-		var onLoad = function(animationReadyCB){			
-			symbol = new lib[symbolName]();
-			symbol.scaleX = scaleX;
-			symbol.scaleY = scaleY;
-			symbol.regX = symbolWidth / 2;
-			symbol.regY = symbolHeight / 2;
-			symbol.x = canvas.width / 2;
-			symbol.y = canvas.height / 2;
-
-			symbol.paused = true;
-
-			addSymbolToStage();
-			
-			if(typeof animationReadyCB == 'function') animationReadyCB();
-
-			createjs.Ticker.addEventListener('tick', animate);
-		}
+		}				
 
 		scope.play = function(range, loops, callback){		
 			if(!symbol || !range) return;
+
+			resetRanges();
 			
-			if(isNaN(+loops)) rangeLoops = 1;
+			if(!loops) rangeLoops = 1;
 			else rangeLoops = +loops;
 
-			if(typeof callback == 'function') rangeFinishedCB = callback;
+			if(typeof callback == 'function') rangeFinishedCB = callback;			
+
+			if(Array.isArray(range)){
+				ranges = range;
+			}
+			else{
+				ranges.push(range);
+			}
 			
-			scope.setRange(range);
+			setRange(ranges[0]);
 
 			symbol.paused = false;
+
+			console.log(ranges);
 		}
 
 		scope.pause = function(){
-			if(!symbol) return;
+			if(!symbol || endFrame === symbol.currentFrame) return;
 			
 			symbol.paused = !symbol.paused;
-		}
-
-		scope.setRange = function(range){
-			if(!symbol || !range) return;	
-
-			startFrame = labels[range][0];
-			endFrame = labels[range][1];	
-
-			if(symbol.paused){
-				symbol.gotoAndStop(startFrame);
-				stage.update();
-			}
-			else{				
-				symbol.gotoAndPlay(startFrame);				
-			}
 		}
 
 		scope.getLabels = function(){				
@@ -106,30 +82,70 @@
 			stage.update();			
 		}
 
+		scope.setScale = function(x, y){
+			symbol.scaleX = scaleX = x;
+			symbol.scaleY = scaleY = y;
+			stage.update();
+		}
+
+		scope.setPosition = function(x,y){
+			symbol.x =  x;
+			symbol.y =  y;
+			stage.update();
+		}
+
+		var onLoad = function(animationReadyCB){			
+			symbol = new lib[symbolName]();
+			symbol.scaleX = scaleX;
+			symbol.scaleY = scaleY;
+			symbol.regX = symbolWidth / 2;
+			symbol.regY = symbolHeight / 2;
+			symbol.x = canvas.width / 2;
+			symbol.y = canvas.height / 2;
+
+			symbol.paused = true;
+
+			addSymbolToStage();
+
+			resetRanges();
+			
+			if(typeof animationReadyCB == 'function') animationReadyCB();
+
+			createjs.Ticker.addEventListener('tick', animate);
+		}
+
 		function animate(){
 			if(symbol.paused) return;
 			updateRange();			
 		}
 
-		function updateRange(){			
+		function updateRange(){						
 			if(startFrame !== null && endFrame !== null){				
 				// if current frame is within range limits
 				if(symbol.currentFrame >= startFrame && symbol.currentFrame < endFrame){
 					stage.update();
 				}
+				else if(currentRange < ranges.length - 1){					
+					currentRange++;
+					setRange(ranges[currentRange]);
+				}
 				else{
-
 					if(rangeLoops > 1){
 						rangeLoops--;
-						symbol.gotoAndPlay(startFrame);
+						currentRange = 0;
+						// symbol.gotoAndPlay(startFrame);
+						setRange(ranges[currentRange]);
 					}	
 					// infinite loop
 					else if(rangeLoops == -1){
-						symbol.gotoAndPlay(startFrame);
+						// symbol.gotoAndPlay(startFrame);
+						currentRange = 0;
+						setRange(ranges[currentRange]);
 						if(typeof rangeFinishedCB == 'function') rangeFinishedCB();
 					}
 					// play finished
-					else{									
+					else{		
+						rangeLoops = 1;
 						symbol.paused = true;
 						if(typeof rangeFinishedCB == 'function') rangeFinishedCB();
 					}
@@ -137,7 +153,31 @@
 			}		
 		}
 
-		function loadSymbol(animationReadyCB){					
+		function setRange(range){
+			if(!symbol || !range) return;
+			
+			startFrame = labels[range][0];
+			endFrame = labels[range][1];	
+
+			if(symbol.paused){
+				symbol.gotoAndStop(startFrame);
+				stage.update();
+			}
+			else{				
+				symbol.gotoAndPlay(startFrame);				
+			}
+		}
+
+		function resetRanges(){
+			currentRange = 0;
+			ranges = [];
+			rangeLoops = 1;
+			rangeFinishedCB = null;
+		}
+
+		function loadSymbol(animationReadyCB){		
+			resetRanges();
+
 			var symbolJson = data[symbolName];
 			symbolWidth = symbolJson.width;
 			symbolHeight = symbolJson.height;
