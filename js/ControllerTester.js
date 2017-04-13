@@ -23,20 +23,20 @@ var ControllerTester = function(data, container){
 			
 		$canvas.attr({"width":width, "height":height});		
 		$canvas.css({"width":width +'px', "height":height + 'px'});		
-
-		var params = 
-			{
-				width: width,
-				heigth: height,
-				scaleX: scaleX,
-				scaleY: scaleY
-			};		
-
+		
 		$animationController.append($canvas);	
 
-		var $selectSymbol, $selectDropdown, $loopsInput;
+		var $selectSymbol, $rangeSelect, $loopsInput;
+		/*
+		██╗███╗   ██╗████████╗███████╗██████╗ ███████╗ █████╗  ██████╗███████╗███████╗
+		██║████╗  ██║╚══██╔══╝██╔════╝██╔══██╗██╔════╝██╔══██╗██╔════╝██╔════╝██╔════╝
+		██║██╔██╗ ██║   ██║   █████╗  ██████╔╝█████╗  ███████║██║     █████╗  ███████╗
+		██║██║╚██╗██║   ██║   ██╔══╝  ██╔══██╗██╔══╝  ██╔══██║██║     ██╔══╝  ╚════██║
+		██║██║ ╚████║   ██║   ███████╗██║  ██║██║     ██║  ██║╚██████╗███████╗███████║
+		╚═╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝ ╚═════╝╚══════╝╚══════╝
+
+		*/
 			
-		
 		// SELECT SYMBOL
 		var $symbolSelectionInterface = createSymbolSelectionInterface();
 		$animationController.append($symbolSelectionInterface);
@@ -48,25 +48,49 @@ var ControllerTester = function(data, container){
 		// ANIMATION INTERFACE
 
 		var $animationInterface = createAnimationInterface();
+		$animationController.append($animationInterface);	
 
-		$animationController.append($animationInterface);		
+		// SCALING INTERFACE
+
+		var $scalingInterface = createScalingInterface();
+		$animationController.append($scalingInterface);	
+
+		// POSITION INTERFACE
+
+		var $positionInterface = createPositionInterface();
+		$animationController.append($positionInterface);	
 
 		// DELETE BUTTON
 
-		var $deleteBtn = $("<button id='delete-btn' class='delete-btn'>X</button>")
+		var $deleteBtn = $("<button id='delete-btn' class='delete-btn' title='Remove'>X</button>")
 		$deleteBtn.on('click', function(){
 			var index = controllers.indexOf(controller);
 			controllers.splice(index, 1);
 			$animationController.remove();
 		});
-		$animationController.append($deleteBtn);	
+		$animationController.append($deleteBtn);
+ 
+		/* INIT CONTROLLER
+		██╗███╗   ██╗██╗████████╗
+		██║████╗  ██║██║╚══██╔══╝
+		██║██╔██╗ ██║██║   ██║   
+		██║██║╚██╗██║██║   ██║   
+		██║██║ ╚████║██║   ██║   
+		╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝   
+		*/
 
-		var controller = new Controller(data, canvas, params);
+		var controller = new Controller(data, canvas, scaleX, scaleY);
 		scope.controllers.push(controller);
 		controller.loadSymbol($selectSymbol.val(), onAnimationLoaded);
 
-		// CREATE INTERFACES FUNCTIONS
-
+		/* CREATING FUNCTIONS
+		███████╗██╗   ██╗███╗   ██╗ ██████╗███████╗
+		██╔════╝██║   ██║████╗  ██║██╔════╝██╔════╝
+		█████╗  ██║   ██║██╔██╗ ██║██║     ███████╗
+		██╔══╝  ██║   ██║██║╚██╗██║██║     ╚════██║
+		██║     ╚██████╔╝██║ ╚████║╚██████╗███████║
+		╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝╚══════╝
+		*/
 		function createSymbolSelectionInterface(){
 			$symbolSelectionInterface = $("<div class='symbol-selection'>");
 
@@ -99,14 +123,10 @@ var ControllerTester = function(data, container){
 			var $label = $("<label>Range:&nbsp</label>")
 			$rangeSelectionInterface.append($label);
 
-			$selectDropdown = $("<select class='select-dropdown' id='range-dropdown'></select");
-			$selectDropdown.attr('data-controller-index', controllers.length);
+			$rangeSelect = $("<select class='select-dropdown' id='range-dropdown'></select");
+			// $rangeSelect.attr('data-controller-index', controllers.length);
 
-			$selectDropdown.on('change', function(){
-				controller.setRange($selectDropdown.val());
-			});
-
-			$rangeSelectionInterface.append($selectDropdown);			
+			$rangeSelectionInterface.append($rangeSelect);			
 
 			return $rangeSelectionInterface;
 		}
@@ -118,7 +138,7 @@ var ControllerTester = function(data, container){
 
 			var $playBtn = $("<button id='play' class='animation-btn'>Play</button>");				
 			$playBtn.on("click", function(){								
-				controller.play($selectDropdown.val(), $loopsInput.val(), onRangeFinished);
+				controller.play($rangeSelect.val(), $loopsInput.val(), onRangeFinished);
 			});
 			$animationInterface.append($playBtn);
 
@@ -145,28 +165,133 @@ var ControllerTester = function(data, container){
 				controller.flipY();
 			});
 			$animationInterface.append($flipYBtn);			
+
+
+			// PLAY RANDOM
+
+			var $playSequence = $("<button id='play-sequence' class='animation-btn'>Play sequence</button>");	
+			$playSequence.on("click", function(){
+				var labels = controller.getLabels();
+				var array = [];
+				for(var i = 0; i < 3; i++){
+					var r = Math.floor(Math.random() * labels.length);
+					array.push(labels[r]);
+				}
+				controller.play(array, $loopsInput.val(), onRangesFinished);			
+			});
+			$animationInterface.append($playSequence);		
+			
+			// LOOPS INPUT	
+
+			var $loopsWrapper = $("<div class='loops'>");
 	
-			// LABEL FOR LOOPS INPUT			
+			// LABEL 		
 
 			var $labelForLoopsInput = $('<label>').text('Num of loops: ');
-			$animationInterface.append($labelForLoopsInput);
+			$loopsWrapper.append($labelForLoopsInput);
 
-			// LOOPS NUM INPUT
+			// INPUT
 
-			var $loopsInput = $("<input id='loops-input' class='loops-input' 'type='text' value='1'>");		
-			$animationInterface.append($loopsInput);
+			$loopsInput = $("<input id='loops-input' class='loops-input' 'type='text' value='1'>");		
+			$loopsWrapper.append($loopsInput);
+
+			$animationInterface.append($loopsWrapper);	
 
 
 			return $animationInterface;
 		}		
 
+		function createScalingInterface(){
+			var $scalingInterface = $("<div class='scaling-interface'></div>");
+
+			// SCALE X
+
+			var $scaleXWrapper = $("<div class='scaleXWrapper'>");
+
+			var $labelForScaleXInput = $('<label>').text('ScaleX: ');
+			var $scaleXInput = $("<input id='scale-x-input' class='scale-input' 'type='text' value='1'>");	
+
+			$scaleXWrapper.append($labelForScaleXInput);
+			$scaleXWrapper.append($scaleXInput);
+
+			// SCALE Y		
+
+			var $scaleYWrapper = $("<div class='scaleYWrapper'>");	
+
+			var $labelForScaleYInput = $('<label>').text('ScaleY: ');
+			var $scaleYInput = $("<input id='scale-y-input' class='scale-input' 'type='text' value='1'>");	
+
+			$scaleXWrapper.append($labelForScaleYInput);
+			$scaleXWrapper.append($scaleYInput);		
+
+			// OK BUTTON
+
+			$okBtn = $("<button id='okBtn' class='scale-btn'>OK</button>");
+			$okBtn.on('click', function(){							
+				controller.setScale($scaleXInput.val(), $scaleYInput.val());			
+			});
+			$rangeSelectionInterface.append($okBtn);		
+
+			$scalingInterface.append($scaleXWrapper);
+			$scalingInterface.append($scaleYWrapper);
+			$scalingInterface.append($okBtn);
+
+			return $scalingInterface;
+		}
+
+		function createPositionInterface(){
+			var $positionInterface = $("<div class='position-interface'></div>");
+
+			var $positionXWrapper = $("<div class='positionXWrapper'>");
+
+			var $labelForPositionXInput = $('<label>').text('X: ');
+			var $positionXInput = $("<input id='position-x-input' class='position-input' 'type='text' value='" + canvas.width / 2 + "'>");	
+
+			$positionXWrapper.append($labelForPositionXInput);
+			$positionXWrapper.append($positionXInput);			
+
+			var $positionYWrapper = $("<div class='positionYWrapper'>");	
+
+			var $labelForpositionYInput = $('<label>').text('Y: ');
+			var $positionYInput = $("<input id='position-y-input' class='position-input' 'type='text' value='" + canvas.height / 2 + "'>");	
+
+			$positionXWrapper.append($labelForpositionYInput);
+			$positionXWrapper.append($positionYInput);		
+
+			$okBtn = $("<button id='okBtn' class='position-btn'>OK</button>");
+			$okBtn.on('click', function(){							
+				controller.setPosition($positionXInput.val(), $positionYInput.val());			
+			});
+			$rangeSelectionInterface.append($okBtn);		
+
+			$positionInterface.append($positionXWrapper);
+			$positionInterface.append($positionYWrapper);
+			$positionInterface.append($okBtn);
+
+			return $positionInterface;
+
+		}
+		/*
+		 ██████╗ █████╗ ██╗     ██╗     ██████╗  █████╗  ██████╗██╗  ██╗███████╗
+		██╔════╝██╔══██╗██║     ██║     ██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔════╝
+		██║     ███████║██║     ██║     ██████╔╝███████║██║     █████╔╝ ███████╗
+		██║     ██╔══██║██║     ██║     ██╔══██╗██╔══██║██║     ██╔═██╗ ╚════██║
+		╚██████╗██║  ██║███████╗███████╗██████╔╝██║  ██║╚██████╗██║  ██╗███████║
+		 ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
+
+		*/
+
+
 		function onAnimationLoaded(){		
-			console.log('animation loaded');
+			console.log('animation ready');
 			loadLabels(controller);
 		}
 
 		function onRangeFinished(){
 			console.log('range finished');
+		}
+		function onRangesFinished(){
+			console.log('all ranges finished');
 		}
 
 		function getSymbolList(){
@@ -176,18 +301,16 @@ var ControllerTester = function(data, container){
 			}
 			return list;
 		}
-		
 
 		function loadLabels(){				
 			var labels = controller.getLabels();
 			if(!labels) return;
 
-			var controllerIndex = controllers.indexOf(controller);
-			var rangeDropdown = $("#range-dropdown[data-controller-index='" + controllerIndex + "']");		
-			rangeDropdown.empty();
+			$rangeSelect.empty();
 
 			for(var i = 0; i < labels.length; i++){
-				rangeDropdown.append($("<option>").attr('value', labels[i]).text(labels[i]));
+
+				$rangeSelect.append($("<option>").attr('value', labels[i]).text(labels[i]));
 			};
 		}
 	}	
