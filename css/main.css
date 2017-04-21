@@ -1,0 +1,113 @@
+html, body{	
+	height: 100%;	
+}
+
+.controller{
+	background: #d0c9c9;
+	width: 200px;
+	min-width: 200px;	
+	height: inherit;
+}
+
+.main{
+	min-height: 100%;
+	display: flex;
+}
+
+.interface{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin: 5px 10px;
+	font-size: 1.2rem;
+}
+
+.interface .UIButton,
+.interface input{
+	font-size: 1.2rem;
+}
+
+.interface input{
+	width: 100%;	
+}
+
+.animation-interface{
+	display:flex;
+	flex-wrap: wrap;
+	width: 100%;	
+	align-items: center;
+	justify-content: center;
+	border-top: solid 1px grey;	
+	padding: 5px 0;
+	margin: 5px auto;
+}
+
+.UIButton{	
+	margin-top: 15px;
+	margin-bottom: 5px;	
+}
+
+.play-zone{
+	flex-grow: 1;
+	display:flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+
+.animation-controller{
+	display:flex;
+	flex-direction: column;
+	border: solid 1px orange;
+	align-self: flex-start;
+	margin: 0 10px 10px 10px;
+	align-items: center;
+	padding: 5px;
+}
+
+canvas{
+	border: solid 1px blue;
+}
+
+.animation-btn{
+	margin: 4px;
+	font-size: 1.1rem;
+}
+
+.symbol-selection, .range-selection{
+	display:flex;
+	flex-wrap:wrap;
+	padding-top : 10px;
+	justify-content: center;	
+}
+
+.select-dropdown{
+	margin-right: 10px;
+	width: 120px;
+}
+
+.select-btn{
+	width: 50px;
+}
+
+.delete-btn{
+	align-self: flex-end;
+	color: red;
+}
+
+.loops-input{
+	width: 20px;
+}
+
+.scale-input, .position-input{
+	width: 25px;
+	margin-right: 10px;
+}
+
+.scaling-interface, .position-interface{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding: 10px 0;
+	border-top: solid 1px grey;
+}
+
